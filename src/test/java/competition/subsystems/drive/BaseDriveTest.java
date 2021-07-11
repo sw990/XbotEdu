@@ -5,12 +5,12 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 
+import competition.BaseCompetitionTest;
 import competition.operator_interface.OperatorInterface;
 import competition.subsystems.pose.PoseSubsystem;
-import xbot.common.injection.BaseWPITest;
 import edu.wpi.first.wpilibj.MockXboxControllerAdapter;
 
-public class BaseDriveTest extends BaseWPITest {
+public class BaseDriveTest extends BaseCompetitionTest {
 
     protected DriveSubsystem drive;
     protected PoseSubsystem pose;
