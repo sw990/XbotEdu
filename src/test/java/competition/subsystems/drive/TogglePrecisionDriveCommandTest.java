@@ -6,7 +6,6 @@ import competition.operator_interface.OperatorInterface;
 import competition.subsystems.drive.commands.TankDriveWithJoysticksCommand;
 import competition.subsystems.drive.commands.TogglePrecisionDriveCommand;
 import xbot.common.command.BaseCommand;
-//import xbot.common.controls.sensors.mock_adapters.MockJoystick;
 import xbot.common.math.XYPair;
 
 public class TogglePrecisionDriveCommandTest extends BaseDriveTest {

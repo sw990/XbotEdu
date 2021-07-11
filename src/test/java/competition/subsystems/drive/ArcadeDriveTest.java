@@ -3,10 +3,10 @@ package competition.subsystems.drive;
 import org.junit.Test;
 
 import xbot.common.command.BaseCommand;
-import xbot.common.controls.sensors.mock_adapters.MockFTCGamepad;
 import xbot.common.math.XYPair;
 import competition.operator_interface.OperatorInterface;
 import competition.subsystems.drive.commands.ArcadeDriveWithJoysticksCommand;
+import edu.wpi.first.wpilibj.MockXboxControllerAdapter;
 
 public class ArcadeDriveTest extends BaseDriveTest {
 
@@ -16,7 +16,7 @@ public class ArcadeDriveTest extends BaseDriveTest {
 
         BaseCommand command = injector.getInstance(ArcadeDriveWithJoysticksCommand.class);
 
-        MockFTCGamepad left = (MockFTCGamepad) oi.gamepad;
+        MockXboxControllerAdapter left = (MockXboxControllerAdapter) oi.gamepad;
 
         command.initialize();
 

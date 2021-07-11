@@ -2,6 +2,7 @@ package competition.subsystems.drive;
 
 import org.junit.Test;
 
+import competition.subsystems.drive.commands.TankDriveWithJoysticksCommand;
 import xbot.common.command.BaseCommand;
 import xbot.common.math.XYPair;
 
