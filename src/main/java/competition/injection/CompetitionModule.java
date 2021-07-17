@@ -3,10 +3,8 @@ package competition.injection;
 import competition.electrical_contract.CompetitionContract;
 import competition.electrical_contract.ElectricalContract;
 import competition.electrical_contract.PracticeContract;
-import competition.subsystems.drive.DriveSubsystem;
 import competition.subsystems.pose.PoseSubsystem;
 import xbot.common.injection.RobotModule;
-import xbot.common.subsystems.drive.BaseDriveSubsystem;
 import xbot.common.subsystems.pose.BasePoseSubsystem;
 
 public class CompetitionModule extends RobotModule {
