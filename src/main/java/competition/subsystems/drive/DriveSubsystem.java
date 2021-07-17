@@ -4,7 +4,6 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-import edu.wpi.first.wpilibj.MockDistanceSensor;
 import competition.electrical_contract.ElectricalContract;
 import xbot.common.command.BaseSubsystem;
 import xbot.common.controls.actuators.XCANTalon;
@@ -42,5 +41,12 @@ public class DriveSubsystem extends BaseSubsystem {
         // to
         // the value of leftPower:
         frontLeft.simpleSet(leftPower);
+    }
+    
+    @Override
+    public void periodic() {
+        super.periodic();
+        frontLeft.updateTelemetryProperties();
+        frontRight.updateTelemetryProperties();
     }
 }

@@ -2,7 +2,6 @@ package competition.injection;
 
 import competition.electrical_contract.CompetitionContract;
 import competition.electrical_contract.ElectricalContract;
-import xbot.common.subsystems.drive.BaseDriveSubsystem;
 import xbot.common.subsystems.pose.BasePoseSubsystem;
 
 
