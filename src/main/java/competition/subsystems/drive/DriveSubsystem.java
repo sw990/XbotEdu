@@ -1,5 +1,6 @@
 package competition.subsystems.drive;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -13,18 +14,25 @@ import xbot.common.injection.electrical_contract.CANTalonInfo;
 @Singleton
 public class DriveSubsystem extends BaseSubsystem {
 
-    public XCANTalon frontLeft;
-    public XCANTalon frontRight;
-    public XCANTalon rearLeft;
-    public XCANTalon rearRight;
+    public final XCANTalon frontLeft;
+    public final XCANTalon frontRight;
+
+    private final double simulatedEncoderFactor = 256.0 * 39.3701; //256 "ticks" per meter, and ~39 inches in a meter
 
     @Inject
     public DriveSubsystem(CommonLibFactory factory, ElectricalContract electricalContract) {
+        log.info("Creating DriveSubsystem");
         // instantiate speed controllers and sensors here, save them as class members
-        frontLeft = factory.createCANTalon(new CANTalonInfo(1));
-        frontRight = factory.createCANTalon(new CANTalonInfo(2));
-        rearLeft = factory.createCANTalon(new CANTalonInfo(3));
-        rearRight = factory.createCANTalon(new CANTalonInfo(4));
+
+        this.frontLeft = factory
+                .createCANTalon(new CANTalonInfo(1, true, FeedbackDevice.CTRE_MagEncoder_Absolute, true, simulatedEncoderFactor));
+        this.frontRight = factory
+                .createCANTalon(new CANTalonInfo(2, true, FeedbackDevice.CTRE_MagEncoder_Absolute, true, simulatedEncoderFactor));
+
+        frontLeft.createTelemetryProperties(this.getPrefix(), "frontLeft");
+        frontRight.createTelemetryProperties(this.getPrefix(), "frontRight");
+
+        this.register();
     }
 
     public void tankDrive(double leftPower, double rightPower) {

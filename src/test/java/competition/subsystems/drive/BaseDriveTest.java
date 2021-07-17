@@ -33,10 +33,8 @@ public class BaseDriveTest extends BaseCompetitionTest {
 
     public void assertDrive(double left, double right, String message) {
         assertEquals(message, left, drive.frontLeft.getMotorOutputPercent(), 0.001);
-        assertEquals(message, left, drive.rearLeft.getMotorOutputPercent(), 0.001);
 
         assertEquals(message, right, drive.frontRight.getMotorOutputPercent(), 0.001);
-        assertEquals(message, right, drive.rearRight.getMotorOutputPercent(), 0.001);
     }
 
     public void assertTurningLeft() {
