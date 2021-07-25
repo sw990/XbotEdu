@@ -12,12 +12,12 @@ import competition.subsystems.drive.DriveSubsystem;
 public class TankDriveWithJoysticksCommand extends BaseCommand {
 
     DriveSubsystem drive;
-    OperatorInterface operate;
+    OperatorInterface operatorInterface;
 
     @Inject
     public TankDriveWithJoysticksCommand(DriveSubsystem driveSubsystem, OperatorInterface oi) {
         drive = driveSubsystem;
-        operate = oi;
+        operatorInterface = oi;
         this.addRequirements(drive);
     }
 
@@ -33,7 +33,7 @@ public class TankDriveWithJoysticksCommand extends BaseCommand {
 
         // Get values from the joysticks:
         // Here's how to get how far the left joystick's Y-axis is pushed:
-        double leftValue = operate.gamepad.getLeftVector().y;
+        double leftValue = operatorInterface.gamepad.getLeftVector().y;
         // You'll need to get how far the RIGHT joystick's Y-axis is pushed as well.
 
         // Pass values into the DriveSubsystem so it can control motors:
