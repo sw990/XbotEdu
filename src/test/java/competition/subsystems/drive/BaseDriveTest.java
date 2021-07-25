@@ -49,8 +49,8 @@ public class BaseDriveTest extends BaseCompetitionTest {
     }
 
     public void setPosition(double position) {
-        ((MockCANTalon)drive.frontRight).setPosition((int)position);
-        ((MockCANTalon)drive.frontLeft).setPosition((int)position);
+        ((MockCANTalon)drive.frontRight).setPosition(position / pose.scalingFactorFromTicksToInches);
+        ((MockCANTalon)drive.frontLeft).setPosition(position / pose.scalingFactorFromTicksToInches);
     } 
 
 }

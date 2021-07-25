@@ -13,6 +13,8 @@ public class PoseSubsystem extends BasePoseSubsystem {
 
     private final DriveSubsystem drive;
 
+    public double scalingFactorFromTicksToInches = 1.0 / 256.0;
+
     @Inject
     public PoseSubsystem(CommonLibFactory clf, PropertyFactory propManager, DriveSubsystem drive) {
         super(clf, propManager);
@@ -25,12 +27,12 @@ public class PoseSubsystem extends BasePoseSubsystem {
 
     @Override
     protected double getLeftDriveDistance() {
-        return drive.frontLeft.getSelectedSensorPosition(0);
+        return drive.frontLeft.getSelectedSensorPosition(0) * scalingFactorFromTicksToInches;
     }
 
     @Override
     protected double getRightDriveDistance() {
-        return drive.frontRight.getSelectedSensorPosition(0);
+        return drive.frontRight.getSelectedSensorPosition(0) * scalingFactorFromTicksToInches;
     }
 
 }
