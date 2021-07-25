@@ -12,28 +12,26 @@ import xbot.common.subsystems.pose.BasePoseSubsystem;
 @Singleton
 public class PoseSubsystem extends BasePoseSubsystem {
 
-    public final MockDistanceSensor odometer;
     private final DriveSubsystem drive;
 
     @Inject
     public PoseSubsystem(CommonLibFactory clf, PropertyFactory propManager, DriveSubsystem drive) {
         super(clf, propManager);
         this.drive = drive;
-        odometer = new MockDistanceSensor();
     }
 
     public double getPosition() {
-        return odometer.getDistance();
+        return (getLeftDriveDistance() + getRightDriveDistance()) / 2.0; 
     }
 
     @Override
     protected double getLeftDriveDistance() {
-        return odometer.getDistance();
+        return drive.frontLeft.getSelectedSensorPosition(0);
     }
 
     @Override
     protected double getRightDriveDistance() {
-        return odometer.getDistance();
+        return drive.frontRight.getSelectedSensorPosition(0);
     }
 
 }
