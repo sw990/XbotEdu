@@ -9,6 +9,7 @@ import competition.BaseCompetitionTest;
 import competition.operator_interface.OperatorInterface;
 import competition.subsystems.pose.PoseSubsystem;
 import edu.wpi.first.wpilibj.MockXboxControllerAdapter;
+import xbot.common.controls.actuators.mock_adapters.MockCANTalon;
 
 public class BaseDriveTest extends BaseCompetitionTest {
 
@@ -46,5 +47,10 @@ public class BaseDriveTest extends BaseCompetitionTest {
         // right < left
         assertTrue(drive.frontLeft.getMotorOutputPercent() > drive.frontRight.getMotorOutputPercent());
     }
+
+    public void setPosition(double position) {
+        ((MockCANTalon)drive.frontRight).setPosition(position / pose.scalingFactorFromTicksToInches);
+        ((MockCANTalon)drive.frontLeft).setPosition(position / pose.scalingFactorFromTicksToInches);
+    } 
 
 }
