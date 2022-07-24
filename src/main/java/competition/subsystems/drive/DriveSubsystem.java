@@ -24,9 +24,9 @@ public class DriveSubsystem extends BaseSubsystem {
         // instantiate speed controllers and sensors here, save them as class members
 
         this.frontLeft = factory
-                .createCANTalon(new CANTalonInfo(1, true, FeedbackDevice.CTRE_MagEncoder_Absolute, true, simulatedEncoderFactor));
+                .createCANTalon(new CANTalonInfo(1, true, FeedbackDevice.CTRE_MagEncoder_Absolute, false, simulatedEncoderFactor));
         this.frontRight = factory
-                .createCANTalon(new CANTalonInfo(2, true, FeedbackDevice.CTRE_MagEncoder_Absolute, true, simulatedEncoderFactor));
+                .createCANTalon(new CANTalonInfo(2, true, FeedbackDevice.CTRE_MagEncoder_Absolute, false, simulatedEncoderFactor));
 
         frontLeft.createTelemetryProperties(this.getPrefix(), "frontLeft");
         frontRight.createTelemetryProperties(this.getPrefix(), "frontRight");
