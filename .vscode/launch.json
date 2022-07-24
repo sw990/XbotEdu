@@ -9,7 +9,7 @@
       "name": "Launch RotationTestVisualizer",
       "request": "launch",
       "mainClass": "xbot.edubot.rotation.RotationTestVisualizer",
-      "projectName": "XbotEdu2",
+      "projectName": "XbotEdu",
       "env": {
         "LD_LIBRARY_PATH": "${workspaceFolder}/build/jni/release",
         "DYLD_LIBRARY_PATH": "${workspaceFolder}/build/jni/release"
@@ -21,7 +21,7 @@
       "name": "Launch LinearTestVisualizer",
       "request": "launch",
       "mainClass": "xbot.edubot.linear.LinearTestVisualizer",
-      "projectName": "XbotEdu2",
+      "projectName": "XbotEdu",
       "env": {
         "LD_LIBRARY_PATH": "${workspaceFolder}/build/jni/release",
         "DYLD_LIBRARY_PATH": "${workspaceFolder}/build/jni/release"
