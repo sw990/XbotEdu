@@ -28,10 +28,10 @@ public class ArcadeDriveTest extends BaseDriveTest {
         command.execute();
         // Since the robot is using a tank drive chassis, moving forward means both the left and right wheels should
         // be moving forward at full power.
-        this.assertDrive(1, 1);
 
         // 1 "Rotation", 0 "Forward" : robot should turn left with maximum power, since postive rotation == left rotation.
-        left.setLeftStick(new XYPair(1, 0));
+        left.setLeftStick(new XYPair(1, 0));        this.assertDrive(1, 1);
+
         command.execute();
         // Tank drive chassis, so to turn left at maximum power, the left side drives backwards and the right side drives forwards (both at full power)
         this.assertDrive(-1, 1);

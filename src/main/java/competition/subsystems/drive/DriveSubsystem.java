@@ -15,7 +15,10 @@ public class DriveSubsystem extends BaseSubsystem {
 
     public final XCANTalon frontLeft;
     public final XCANTalon frontRight;
+    public boolean preciseMode;
 
+   
+   
     private final double simulatedEncoderFactor = 256.0 * 39.3701; //256 "ticks" per meter, and ~39 inches in a meter
 
     @Inject
@@ -40,11 +43,30 @@ public class DriveSubsystem extends BaseSubsystem {
         // an example, here is some code that has the frontLeft motor to spin according
         // to
         // the value of leftPower:
+        if(preciseMode){
+            leftPower = leftPower/2;
+            rightPower = rightPower/2;
+        }
         frontLeft.simpleSet(leftPower);
-        frontRight.simpleSet(rightPower);
+            frontRight.simpleSet(rightPower);
+        
+        
     }
 
-    
+
+
+    public void setPrecisionMode(){
+        preciseMode = true;
+    }
+
+    public void turnOffPrecisionMode(){
+        preciseMode = false;
+    }
+
+    public boolean getPrecisionMode(){
+        return preciseMode;
+    }
+
     @Override
     public void periodic() {
         super.periodic();

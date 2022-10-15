@@ -12,6 +12,7 @@ public class TogglePrecisionDriveCommand extends BaseCommand {
     @Inject
     public TogglePrecisionDriveCommand(DriveSubsystem driveSubsystem) {
         drive = driveSubsystem;
+       
     }
 
     @Override
@@ -31,7 +32,17 @@ public class TogglePrecisionDriveCommand extends BaseCommand {
         // the current mode.
         // In all of these cases you'll need to have the mode somehow affect the
         // TankDrive method.
+    if(drive.getPrecisionMode()){
+        drive.turnOffPrecisionMode();
+    }else{
+        drive.setPrecisionMode();
     }
+
+}
+
+
+
+   
 
     @Override
     public void execute() {
