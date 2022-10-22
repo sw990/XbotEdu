@@ -52,8 +52,10 @@ public class DriveSubsystem extends BaseSubsystem {
         
         
     }
-
-
+    public void arcadeDrive(double leftPower, double rightPower){
+frontLeft.simpleSet(leftPower);
+frontRight.simpleSet(rightPower);
+    }
 
     public void setPrecisionMode(){
         preciseMode = true;
