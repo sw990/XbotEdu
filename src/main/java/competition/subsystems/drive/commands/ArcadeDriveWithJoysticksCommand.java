@@ -28,27 +28,9 @@ public class ArcadeDriveWithJoysticksCommand extends BaseCommand {
         // joysticks value
        double leftValueX = operatorInterface.gamepad.getLeftVector().x;
        double leftValueY = operatorInterface.gamepad.getLeftVector().y;
-     // turn left (-1,0)
-     if(leftValueX < 0 && leftValueY == 0){
-       drive.arcadeDrive(-1, 1);
-     }
-     //turn right(1,0)
-     if(leftValueX > 0 && leftValueY == 0){
-       drive.arcadeDrive(1, -1);
-     }
-     //forward(0,1)
-     if(leftValueX == 0 && leftValueY > 0){
-       drive.arcadeDrive(1, 1);
-     }
-     //backwards(0,-1)
-     if(leftValueX == 0 && leftValueY < 0){
-       drive.arcadeDrive(-1, -1);
-     }
-
-     if(leftValueX + leftValueY == 0){
-      drive.arcadeDrive(0, 0);
+      
+      drive.arcadeDrive(leftValueY - leftValueX, leftValueY+leftValueX);
     }
-      //continue here
-    }
+ 
+  }
 
-}
