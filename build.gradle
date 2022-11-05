@@ -3,6 +3,8 @@ import edu.wpi.first.gradlerio.deploy.roborio.RoboRIO
 plugins {
     id "java"
     id "edu.wpi.first.GradleRIO" version "2022.3.1" 
+    id "eclipse"
+    id "com.diffplug.eclipse.apt" version "3.39.0"
     id 'checkstyle'
     id 'jacoco'
     id 'org.hidetake.ssh' version "2.9.0"
@@ -63,7 +65,8 @@ repositories {
     jcenter()
     
     maven {
-        url "https://mvnrepository.com/artifact/com.google.inject/guice"
+        url "https://mvnrepository.com/artifact/com.google.dagger/dagger"
+        url "https://mvnrepository.com/artifact/com.google.dagger/dagger-compiler"
         url "https://first.wpi.edu/FRC/roborio/maven/release"
         url "https://devsite.ctr-electronics.com/maven/release/"
     }
@@ -104,10 +107,12 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
     implementation "xbot.common:scl"
-    implementation group: 'com.google.inject', name: 'guice', version: '4.2.2'
-    implementation group: 'com.google.inject.extensions', name: 'guice-assistedinject', version: '4.2.2'
     implementation group: 'log4j', name: 'log4j', version: '1.2.17'
     implementation group: 'org.json', name:'json', version: '20201115'
+
+    implementation 'com.google.dagger:dagger:2.43.2'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.43.2'
+    testAnnotationProcessor 'com.google.dagger:dagger-compiler:2.43.2'
 }
 
 wpi.sim.addGui().defaultEnabled = true
@@ -146,6 +151,40 @@ task('copyResources') {
     }
 }
 
+tasks.getByName('eclipseJdtApt') {
+    dependsOn gradle.includedBuilds*.task(':eclipseJdtApt')
+}
+tasks.getByName('eclipseJdt') {
+    dependsOn gradle.includedBuilds*.task(':eclipseJdt')
+}
+tasks.getByName('eclipseFactorypath') {
+    dependsOn gradle.includedBuilds*.task(':eclipseFactorypath')
+}
+eclipse {
+	// re-generate APT configuration on Gradle project synchronisation
+	synchronizationTasks eclipseJdtApt, eclipseJdt, eclipseFactorypath
+
+	jdt.apt {
+        genSrcDir = file('bin/generated/sources/annotationProcessor/java/main')
+        genTestSrcDir = file('bin/generated/sources/annotationProcessor/java/test')
+    }
+
+    classpath.file {
+        beforeMerged { classpath -> 
+            sourceSets.main.java.srcDirs += "bin/generated/sources/annotationProcessor/java/main"
+            sourceSets.test.java.srcDirs += "bin/generated/sources/annotationProcessor/java/test"
+        }
+
+        whenMerged { classpath ->
+            classpath.entries.each { entry -> 
+                if (entry.path.contains('bin/generated')) {
+                    entry.entryAttributes['ignore_optional_problems'] = true
+                }
+            }
+        }
+    }
+}
+
 checkstyle {
     toolVersion = '8.7'
     configFile = file('SeriouslyCommonLib/xbotcheckstyle.xml')
@@ -163,6 +202,14 @@ test {
     reports {
         junitXml.required = true
     }               
+}
+
+// force test project in SCL to compile so Dagger generation runs
+tasks.getByName('compileTestJava') {
+    dependsOn gradle.includedBuilds*.task(':compileTestJava')
+}
+tasks.getByName('clean') {
+    dependsOn gradle.includedBuilds*.task(':clean')
 }
 
 tasks.withType(Test) {
