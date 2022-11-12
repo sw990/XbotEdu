@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Launch RotationTestVisualizer",
+      "request": "launch",
+      "mainClass": "xbot.edubot.rotation.RotationTestVisualizer",
+      "projectName": "XbotEdu.git"
+    },
+    {
+      "type": "java",
       "name": "Launch LinearTestVisualizer",
       "request": "launch",
       "mainClass": "xbot.edubot.linear.LinearTestVisualizer",
