@@ -15,6 +15,7 @@ public class TurnLeft90DegreesCommand extends BaseCommand {
     public double goalPos;
     public double currentPos;
     public double prePos;
+    public double power;
 
     @Inject
     public TurnLeft90DegreesCommand(DriveSubsystem driveSubsystem, PoseSubsystem pose) {
@@ -34,13 +35,21 @@ public class TurnLeft90DegreesCommand extends BaseCommand {
         double currentPos = pose.getCurrentHeading().getDegrees();
         double goal = goalPos - currentPos;
         double denominator = goalPos;
-        double power = (goal/denominator)*10 - (currentPos - prePos );
+        double power = (goal/denominator)*10 - (currentPos - prePos);
+       
         drive.tankDrive(-power, power);
         prePos = pose.getCurrentHeading().getDegrees();
         
-        // continue here : verify command reports successfully finished
+        // continue here : make it so it turns to target pos when it's negative
         
 
+    }
+
+    public boolean isFinished(){
+       if(pose.getCurrentHeading().getDegrees() == goalPos){
+           return true;
+       }
+       return false;
     }
 
 }
