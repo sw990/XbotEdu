@@ -46,10 +46,10 @@ public class DriveToOrientationCommand extends BaseCommand {
 
         double currentPos = pose.getCurrentHeading().getDegrees();
        
-        double goal = (goalPos - currentPos) + 360;
-       
-        double denominator = goalPos;
-        double power = (goal/denominator)  - (currentPos - prePos);
+        double goal = (goalPos - currentPos);
+
+
+        double power = goal * .02 - (currentPos - prePos) *.3;
         drive.tankDrive(-power, power);
        
         
@@ -64,7 +64,7 @@ public class DriveToOrientationCommand extends BaseCommand {
     public boolean isFinished() {
         // Modify this to return true once you have met your goal,
         // and you're moving fairly slowly (ideally stopped)
-        if(pose.getCurrentHeading().getDegrees() < goalPos){
+        if(pose.getCurrentHeading().getDegrees() == goalPos){
             return true;
         }
         return false;
